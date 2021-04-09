@@ -3,7 +3,7 @@ import { useRouteMatch, Route, Switch } from 'react-router-dom'
 import PostPage from './PostPage.js'
 import PostsPage from './PostsPage.js'
 
-const Posts = () => {
+const Posts = ({ user }) => {
     const { path } = useRouteMatch();
     return (
         <div>

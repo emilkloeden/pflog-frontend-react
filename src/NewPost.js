@@ -17,7 +17,9 @@ const NewPost = () => {
             method: 'POST',
             body: JSON.stringify(formData),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+
             }
         }).then(res => res.status === 201 ? setSubmitted(true) : setSomethingWentWrong(true))
             .catch(e => console.error(e))

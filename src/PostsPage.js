@@ -15,7 +15,7 @@ const PostsPage = () => {
         <div>
             {errors ? "No posts yet, check back soon!" :
                 <ul>
-                    {posts.map(({ title, body, username, published_date }) => <Post title={title} body={body} username={username} published_date={published_date} />)}
+                    {posts.map(({ title, body, username, published_date, post_id }) => <Post title={title} body={body} username={username} published_date={published_date} key={post_id} />)}
                 </ul>
             }
         </div>

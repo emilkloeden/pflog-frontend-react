@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 
-const Signin = () => {
+const Signin = ({ setUserFromToken }) => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [submitted, setSubmitted] = useState(false)
@@ -11,8 +11,9 @@ const Signin = () => {
         setToken(json.token);
         setSubmitted(true);
     }
-    function setToken(token) {
-        sessionStorage.setItem('token', token);
+    const setToken = (token) => {
+        localStorage.setItem('token', token);
+        setUserFromToken();
     }
 
     const handleSubmit = (e) => {

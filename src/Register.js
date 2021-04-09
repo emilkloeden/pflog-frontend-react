@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 
-const Register = () => {
+const Register = ({ setUserFromToken }) => {
     const [firstName, setFirstName] = useState("");
     const [surname, setSurname] = useState("");
     const [email, setEmail] = useState("");
@@ -9,6 +9,16 @@ const Register = () => {
     const [password, setPassword] = useState("");
     const [submitted, setSubmitted] = useState(false);
     const [somethingWentWrong, setSomethingWentWrong] = useState(false);
+
+    const handleSuccess = (json) => {
+        setToken(json.token);
+        setSubmitted(true);
+    }
+
+    const setToken = (token) => {
+        localStorage.setItem('token', token);
+        setUserFromToken();
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -25,7 +35,7 @@ const Register = () => {
             headers: {
                 'Content-Type': 'application/json'
             }
-        }).then(res => res.status === 201 ? setSubmitted(true) : setSomethingWentWrong(true))
+        }).then(res => res.status === 201 ? res.json().then(handleSuccess) : setSomethingWentWrong(true))
             .catch(e => console.error(e))
 
 
